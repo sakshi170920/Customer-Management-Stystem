@@ -48,7 +48,7 @@
             <label class="form-label text-white" for="mobile_number">Mobile Number</label>
         </div>
         <div class="col-lg-9">
-            <input class="form-control" type="number" ngModel name="mobile_number" id="mobile_Number" placeholder="Mobile Number"
+            <input class="form-control" type="number" ngModel name="mobile_number" id="mobile_Number" placeholder="Mobile Number" pattern="[7-9]{1}[0-9]{9}"
                 required  #mobileNumberT="ngModel">
                 <p *ngIf="mobileNumberT.touched">
                     <small class="text-danger" *ngIf="mobileNumberT.errors?.['required']">Mobile Number is required</small>
