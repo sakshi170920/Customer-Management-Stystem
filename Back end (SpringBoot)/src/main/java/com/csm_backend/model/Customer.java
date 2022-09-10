@@ -19,5 +19,6 @@ public class Customer {
     private String name;
     @Column(unique = true)
     private String email;
-    private int mobile_number;
+    @Column(length = 10,unique = true)
+    private long mobile_number;
 }
