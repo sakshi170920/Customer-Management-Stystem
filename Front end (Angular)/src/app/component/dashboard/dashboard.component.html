@@ -1,8 +1,8 @@
-<div class="container-fluid">
+<div class="container-fluid bg-dark custom">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Customer Management System</a>
+          <h2 class="navbar-brand" href="#">Customer Management System</h2>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -14,7 +14,7 @@
 
 
 
-    <table class="table table-hover">
+    <table class="table table-hover table-striped table-dark">
         <thead>
           <tr>
             <th scope="col">Customer ID</th>
@@ -25,7 +25,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let customer of empList">
+          <tr *ngFor="let customer of customerList">
             <td>{{customer.id}}</td>
             <td>{{customer.name}}</td>
             <td>{{customer.email}}</td>
@@ -50,8 +50,56 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+
+          <form (submit)="addCustomer(customerForm.value)" class="form-group" #customerForm="ngForm">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <label for="customerName" class="form-label">Customer Name</label>
+                </div>
+                <div class="col-lg-9">
+                    <input class="form-control" type="text" name="customerName" ngModel id="customerName"
+                        placeholder="Input your name" required pattern="[a-zA-Z\s]+" #customerNameT="ngModel"
+                        [class.is-invalid]="customerNameT.touched && customerNameT.invalid"
+                        [class.is-valid]="customerNameT.dirty && customerNameT.valid">
+                    <p *ngIf="customerNameT.touched">
+                        <small class="text-danger" *ngIf="customerNameT.errors?.['required']">Customer Name is required</small>
+                        <small class="text-danger" *ngIf="customerNameT.errors?.['pattern']">Input a valid Customer Name</small>
+                    </p> 
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-lg-3">
+                    <label class="form-label" for="customerId">ID</label>
+                </div>
+                <div class="col-lg-9">
+                    <input class="form-control" type="number" ngModel name="customerId" id="customerId" placeholder="Inpunt ID"
+                        required min="0" minlength="6" #customerIdT="ngModel">
+                        <p *ngIf="customerIdT.touched">
+                            <small class="text-danger" *ngIf="customerIdT.errors?.['required']">Customer ID is required</small>
+                            <small class="text-danger" *ngIf="customerIdT.errors?.['min']">Input a valid Customer ID</small>
+                        </p> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <label class="form-label" for="joinDate">Date Joined</label>
+                </div>
+                <div class="col-lg-9">
+                    <input class="form-control" ngModel required type="date" name="joinDate" id="joinDate" #joinDateT="ngModel">
+                    <p *ngIf="customerIdT.touched">
+                        <small class="text-danger" *ngIf="joinDateT.errors?.['required']">Join Date is required</small>
+                    </p> 
+                </div>
+            </div>
+            <div>
+                <button [disabled]="customerForm.invalid" class="btn btn-primary" type="submit">Submit</button> | 
+                <button class="btn btn-danger" type="reset">Clear Form</button>
+            </div>
+        </form>
           
-            <form [formGroup]="empDetail">
+            <!-- <form [formGroup]="customerDetails">
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Name </label>
                     <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
@@ -68,7 +116,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addCustomer()">Add customer</button>
                   </div>
-              </form>
+              </form> -->
 
         </div>
         
@@ -76,7 +124,7 @@
     </div>
   </div>
 
-  
+
   <!-- Edit customer modal -->
   <div class="modal fade" id="editCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -87,11 +135,23 @@
         </div>
         <div class="modal-body">
 
-            <form [formGroup]="empDetail">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Name </label>
-                    <input type="text" formControlName="name" class="form-control" id="name" aria-describedby="emailHelp">
-                  </div>
+            <!-- <form [formGroup]="customerDetails">
+              
+                  <div class="row">
+                    <div class="col-lg-3">
+                        <label for="customerName" class="form-label">Name</label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" name="customerName" ngModel id="customerName"
+                            placeholder="Input your name" required pattern="[a-zA-Z\s]+" #customerNameT="ngModel"
+                            [class.is-invalid]="customerNameT.touched && customerNameT.invalid"
+                            [class.is-valid]="customerNameT.dirty && customerNameT.valid">
+                        <p *ngIf="customerNameT.touched">
+                            <small class="text-danger" *ngIf="customerNameT.errors?.['required']">Customer Name is required</small>
+                            <small class="text-danger" *ngIf="customerNameT.errors?.['pattern']">Input a valid name</small>
+                        </p> 
+                    </div>
+                </div>
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Email </label>
                   <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -104,7 +164,55 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-outline-success" (click)="updateCustomer()" data-bs-dismiss="modal">Update </button>
                   </div>
-              </form>
+              </form> -->
+
+              <form (submit)="addCustomer(customerForm.value)" class="form-group" #customerForm="ngForm">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label for="customerName" class="form-label">Customer Name</label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="text" name="customerName" ngModel id="customerName"
+                            placeholder="Input your name" required pattern="[a-zA-Z\s]+" #customerNameT="ngModel"
+                            [class.is-invalid]="customerNameT.touched && customerNameT.invalid"
+                            [class.is-valid]="customerNameT.dirty && customerNameT.valid">
+                        <p *ngIf="customerNameT.touched">
+                            <small class="text-danger" *ngIf="customerNameT.errors?.['required']">Customer Name is required</small>
+                            <small class="text-danger" *ngIf="customerNameT.errors?.['pattern']">Input a valid Customer Name</small>
+                        </p> 
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label class="form-label" for="customerId">ID</label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input class="form-control" type="number" ngModel name="customerId" id="customerId" placeholder="Inpunt ID"
+                            required min="0" minlength="6" #customerIdT="ngModel">
+                            <p *ngIf="customerIdT.touched">
+                                <small class="text-danger" *ngIf="customerIdT.errors?.['required']">Customer ID is required</small>
+                                <small class="text-danger" *ngIf="customerIdT.errors?.['min']">Input a valid Customer ID</small>
+                            </p> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <label class="form-label" for="joinDate">Date Joined</label>
+                    </div>
+                    <div class="col-lg-9">
+                        <input class="form-control" ngModel required type="date" name="joinDate" id="joinDate" #joinDateT="ngModel">
+                        <p *ngIf="customerIdT.touched">
+                            <small class="text-danger" *ngIf="joinDateT.errors?.['required']">Join Date is required</small>
+                        </p> 
+                    </div>
+                </div>
+                <div>
+                    <button [disabled]="customerForm.invalid" class="btn btn-primary" type="submit">Submit</button> | 
+                    <button class="btn btn-danger" type="reset">Clear Form</button>
+                </div>
+            </form>
 
         </div>
       </div>

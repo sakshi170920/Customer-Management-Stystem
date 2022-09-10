@@ -1,9 +1,9 @@
-<h2>Customer Registration Form</h2>
+<div class="container">
 <form (submit)="addAndEditCustomer(customerForm.value)" class="form-group" #customerForm="ngForm">
 
     <div class="row">
         <div class="col-lg-3">
-            <label for="id" class="form-label">Customer Id</label>
+            <label for="id" class="form-label text-white">Customer Id</label>
         </div>
         <div class="col-lg-9">
             <input class="form-control" type="number" name="id" ngModel id="id"
@@ -18,7 +18,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3">
-            <label for="name" class="form-label">Customer Name</label>
+            <label for="name" class="form-label text-white">Customer Name</label>
         </div>
         <div class="col-lg-9">
             <input class="form-control" type="text" name="name" ngModel id="name"
@@ -33,7 +33,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3">
-            <label class="form-label" for="email">Email</label>
+            <label class="form-label text-white" for="email">Email</label>
         </div>
         <div class="col-lg-9">
             <input class="form-control" ngModel required type="email" name="email" id="email" #emailT="ngModel" placeholder="Enter your email id">
@@ -45,7 +45,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3">
-            <label class="form-label" for="mobile_number">Mobile Number</label>
+            <label class="form-label text-white" for="mobile_number">Mobile Number</label>
         </div>
         <div class="col-lg-9">
             <input class="form-control" type="number" ngModel name="mobile_number" id="mobile_Number" placeholder="Mobile Number"
@@ -61,5 +61,6 @@
         <button class="btn btn-danger" type="reset">Clear Form</button>
     </div>
 </form>
+</div>
 
 

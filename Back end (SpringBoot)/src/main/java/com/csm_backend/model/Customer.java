@@ -13,11 +13,9 @@ import javax.persistence.*;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     @Column(unique = true)
     private String email;
-    @Column(length = 10)
-    private int number;
+    private int mobile_number;
 }

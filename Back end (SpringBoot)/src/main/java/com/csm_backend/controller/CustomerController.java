@@ -14,16 +14,10 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    // Add new customer
-    @PostMapping("/addCustomer")
-    public Customer addCustomer(@RequestBody Customer customer) {
-        return customerService.addCustomer(customer);
-    }
-
-    // Add more than 1 customer
-    @PostMapping("/addCustomers")
-    public List<Customer> addAllCustomers(@RequestBody List<Customer> customers) {
-        return customerService.addAllCustomers(customers);
+    // Add new customer/edit customer
+    @PostMapping("/addAndEditCustomer")
+    public Customer addAndEditCustomer(@RequestBody Customer customer) {
+        return customerService.addAndEditCustomer(customer);
     }
 
     // Get customer by Id
@@ -38,11 +32,6 @@ public class CustomerController {
         return  customerService.getCustomerByName(name);
     }
 
-    // Update customer
-    @PutMapping("/updateCustomer")
-    public Customer updateCustomer(@RequestBody Customer customer) {
-        return customerService.updateCustomer(customer);
-    }
 
     // Delete customer
     @DeleteMapping("/deleteCustomerById/{id}")

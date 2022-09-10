@@ -13,12 +13,8 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public Customer addCustomer(Customer customer) {
+    public Customer addAndEditCustomer(Customer customer) {
         return customerRepository.save(customer);
-    }
-
-    public List<Customer> addAllCustomers(List<Customer> customers) {
-        return  customerRepository.saveAll(customers);
     }
 
     public Customer getCustomerByID(int id) {
@@ -27,21 +23,6 @@ public class CustomerService {
 
     public Customer getCustomerByName(String name) {
         return  customerRepository.findByName(name);
-    }
-
-    public Customer updateCustomer(Customer customer) {
-        Customer existingCustomer = customerRepository.findById(customer.getId()).orElse(null);
-        System.out.println(customer);
-        if(existingCustomer == null) {
-            System.out.println("Customer not found");
-            return  customerRepository.save(customer);
-        }else  {
-            existingCustomer.setName(customer.getName());
-            existingCustomer.setEmail(customer.getEmail());
-            existingCustomer.setNumber(customer.getNumber());
-            customerRepository.save(existingCustomer);
-        }
-        return customer;
     }
 
     public boolean deleteCustomerByID(int id) {

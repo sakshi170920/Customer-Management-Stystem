@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms'
+import { CustomerClientService } from 'src/app/customer-client.service';
 import { Customer } from 'src/app/model/customer';
-import { CustomerService } from 'src/app/service/customer.service';
 
 
 @Component({
@@ -11,83 +11,48 @@ import { CustomerService } from 'src/app/service/customer.service';
 })
 export class DashboardComponent implements OnInit {
 
-  empDetail !: FormGroup;
-  empObj : Customer = new Customer();
-  empList : Customer[] = [];
-
-  constructor(private formBuilder : FormBuilder, private empService : CustomerService) { }
 
   ngOnInit(): void {
-
-    this.getAllCustomer();
-
-    this.empDetail = this.formBuilder.group({
-      id : [''],
-      name : [''],
-      number: [''],
-      email: ['']
-    });    
+    this.fetchData();
 
   }
 
-  addCustomer() {
-    console.log(this.empDetail);
-    this.empObj.id = this.empDetail.value.id;
-    this.empObj.name = this.empDetail.value.name;
-    this.empObj.number = this.empDetail.value.number;
-    this.empObj.email = this.empDetail.value.email;
+  constructor(private  customerClientService: CustomerClientService) { }
 
-    this.empService.addCustomer(this.empObj).subscribe(res=>{
-        console.log(res);
-        this.getAllCustomer();
-    },err=>{
-        console.log(err);
-    });
 
+  addCustomer(customer:Customer){
+    this.customerClientService.addCustomer(customer).subscribe(
+      // data => this._router.navigate(['/view-customer'])
+    )
   }
 
-  getAllCustomer() {
-    this.empService.getAllCustomer().subscribe(res=>{
-        this.empList = res;
-    },err=>{
-      console.log("error while fetching data.")
-    });
+  customerList:Array<Customer>=[];
+
+  fetchData(){
+    this.customerClientService.getAllCustomers().subscribe(
+      data => {
+        
+        this.customerList=data;
+      }
+
+  )
   }
 
-  editCustomer(customer : Customer) {
-    this.empDetail.controls['id'].setValue(customer.id);
-    this.empDetail.controls['name'].setValue(customer.name);
-    this.empDetail.controls['email'].setValue(customer.email);
-    this.empDetail.controls['number'].setValue(customer.number);
+
+
+  deleteCustomer(customerId:number){
+    
+    if(confirm("Sure to delete?")){
+
+    this.customerClientService.deleteCustomer(customerId).subscribe(
+      data=> {
+        alert("Deleted Successfully!!")
+        this.fetchData()
+      }
+    )
 
   }
+}
 
-  updateCustomer() {
-
-    this.empObj.id = this.empDetail.value.id;
-    this.empObj.name = this.empDetail.value.name;
-    this.empObj.number = this.empDetail.value.number;
-    this.empObj.email = this.empDetail.value.email;
-
-    this.empService.updateCustomer(this.empObj).subscribe(res=>{
-      console.log(res);
-      this.getAllCustomer();
-    },err=>{
-      console.log(err);
-    })
-
-  }
-
-  deleteCustomer(customer : Customer) {
-
-    this.empService.deleteCustomer(customer).subscribe(res=>{
-      console.log(res);
-      alert('Customer deleted successfully');
-      this.getAllCustomer();
-    },err => {
-      console.log(err);
-    });
-
-  }
 
 }
