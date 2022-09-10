@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 import { MainComponent } from './main/main.component';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { AddEditCustomerComponent } from './add-edit-customer/add-edit-customer.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AddEditCustomerComponent } from './add-edit-customer/add-edit-customer.
     NavComponent,
     MainComponent,
     ViewCustomerComponent,
-    AddEditCustomerComponent
+    AddEditCustomerComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
