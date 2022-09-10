@@ -28,8 +28,8 @@ public class CustomerController {
 
     // Get customer by name
     @GetMapping("/getCustomerByName/{name}")
-    public  Customer getCustomerByName(@PathVariable String name) {
-        return  customerService.getCustomerByName(name);
+    public List<Customer> getCustomerByName(@PathVariable String name) {
+        return customerService.getCustomerByName(name);
     }
 
 
