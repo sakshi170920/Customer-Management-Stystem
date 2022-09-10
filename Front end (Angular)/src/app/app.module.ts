@@ -1,23 +1,37 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { NavComponent } from './nav/nav.component';
+import { MainComponent } from './main/main.component';
+import { ViewCustomerComponent } from './view-customer/view-customer.component';
+import { AddEditCustomerComponent } from './add-edit-customer/add-edit-customer.component';
+import { AboutComponent } from './about/about.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+
+    HeaderComponent,
+    FooterComponent,
+    NavComponent,
+    MainComponent,
+    ViewCustomerComponent,
+    AddEditCustomerComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
-    FormsModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

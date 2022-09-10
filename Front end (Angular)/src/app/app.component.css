@@ -1,0 +1,11 @@
+header{
+    min-height: 150px;
+}
+
+main{
+    min-height: 500px;
+}
+
+footer{
+    min-height: 150px;
+}
