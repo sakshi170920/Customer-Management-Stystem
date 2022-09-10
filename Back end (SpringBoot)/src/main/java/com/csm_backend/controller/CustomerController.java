@@ -20,6 +20,12 @@ public class CustomerController {
         return customerService.addAndEditCustomer(customer);
     }
 
+    // Add more than 1 customer
+    @PostMapping("/addCustomers")
+    public List<Customer> addAllCustomers(@RequestBody List<Customer> customers) {
+        return customerService.addAllCustomers(customers);
+    }
+
     // Get customer by Id
     @GetMapping("/getCustomerByID/{id}")
     public Customer getCustomerById(@PathVariable int id) {

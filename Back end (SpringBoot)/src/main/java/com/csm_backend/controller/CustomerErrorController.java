@@ -15,7 +15,7 @@ public class CustomerErrorController {
 
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = CustomerNotFoundException.class)
-    public ErrorResponse handleEmployeeNotFoundException(Exception ex,
+    public ErrorResponse handleCustomerNotFoundException(Exception ex,
                                                          HttpServletRequest req) {
         return new ErrorResponse(LocalDateTime.now(),
                 HttpStatus.NOT_FOUND.value(),
@@ -23,5 +23,4 @@ public class CustomerErrorController {
                 ex.getMessage(),
                 req.getRequestURI());
     }
-
 }
