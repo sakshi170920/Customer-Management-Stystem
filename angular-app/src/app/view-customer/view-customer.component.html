@@ -1,0 +1,26 @@
+<div class="empListTab">
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile Number</th>
+            <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let customer of customerList">
+                <td>{{customer.id}}</td>
+                <td>{{customer.name}}</td>
+                <td>{{customer.email}}</td>
+                <td>{{customer.mobile_number}}</td>
+                <td>
+                    <div class="col-lg-3">
+                        <td><button (click)="deleteCustomer(customer)" class="btn btn-danger">Delete</button></td>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

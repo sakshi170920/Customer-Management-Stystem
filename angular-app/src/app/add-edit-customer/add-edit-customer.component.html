@@ -1,0 +1,65 @@
+<h2>Customer Registration Form</h2>
+<form (submit)="addAndEditCustomer(customerForm.value)" class="form-group" #customerForm="ngForm">
+
+    <div class="row">
+        <div class="col-lg-3">
+            <label for="id" class="form-label">Customer Id</label>
+        </div>
+        <div class="col-lg-9">
+            <input class="form-control" type="number" name="id" ngModel id="id"
+                placeholder="Input your Id"  #customerIdT="ngModel"
+                [class.is-invalid]="customerIdT.touched && customerIdT.invalid"
+                [class.is-valid]="customerIdT.dirty && customerIdT.valid">
+            <p *ngIf="customerIdT.touched">
+                <small class="text-danger" *ngIf="customerIdT.errors?.['required']">Customer Id is required</small>
+                <small class="text-danger" *ngIf="customerIdT.errors?.['pattern']">Input a valid Customer Id</small>
+            </p> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <label for="name" class="form-label">Customer Name</label>
+        </div>
+        <div class="col-lg-9">
+            <input class="form-control" type="text" name="name" ngModel id="name"
+                placeholder="Input your name" required pattern="[a-zA-Z\s]+" #customerNameT="ngModel"
+                [class.is-invalid]="customerNameT.touched && customerNameT.invalid"
+                [class.is-valid]="customerNameT.dirty && customerNameT.valid">
+            <p *ngIf="customerNameT.touched">
+                <small class="text-danger" *ngIf="customerNameT.errors?.['required']">Customer Name is required</small>
+                <small class="text-danger" *ngIf="customerNameT.errors?.['pattern']">Input a valid Customer Name</small>
+            </p> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <label class="form-label" for="email">Email</label>
+        </div>
+        <div class="col-lg-9">
+            <input class="form-control" ngModel required type="email" name="email" id="email" #emailT="ngModel" placeholder="Enter your email id">
+            <p *ngIf="emailT.touched">
+                <small class="text-danger" *ngIf="emailT.errors?.['required']">Email is required</small>
+                <small class="text-danger" *ngIf="emailT.errors?.['pattern']">Input a valid Email ID</small>
+            </p> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <label class="form-label" for="mobile_number">Mobile Number</label>
+        </div>
+        <div class="col-lg-9">
+            <input class="form-control" type="number" ngModel name="mobile_number" id="mobile_Number" placeholder="Mobile Number"
+                required  #mobileNumberT="ngModel">
+                <p *ngIf="mobileNumberT.touched">
+                    <small class="text-danger" *ngIf="mobileNumberT.errors?.['required']">Mobile Number is required</small>
+                    <small class="text-danger" *ngIf="mobileNumberT.errors?.['min']">Input a valid Mobile Number</small>
+                </p> 
+        </div>
+    </div>
+    <div>
+        <button [disabled]="customerForm.invalid" class="btn btn-primary" type="submit">Submit</button> | 
+        <button class="btn btn-danger" type="reset">Clear Form</button>
+    </div>
+</form>
+
+
